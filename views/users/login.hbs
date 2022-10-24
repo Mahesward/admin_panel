@@ -1,0 +1,63 @@
+<style>
+    .gradient-custom {
+        /* fallback for old browsers */
+        background: #4776E6;
+        /* fallback for old browsers */
+        background: -webkit-linear-gradient(to right, #79437a, #0038bb);
+        /* Chrome 10-25, Safari 5.1-6 */
+        background: linear-gradient(to right, #39cacd, #5bd20c);
+        /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
+
+
+    }
+</style>
+
+
+
+
+    <section class="vh-100 gradient-custom">
+        <div class="container pt-5 pb-2 h-100">
+            <div class="row d-flex justify-content-center align-items-center h-100">
+                <div class="col-12 col-md-8 col-lg-6 col-xl-5">
+                    <div class="card  text-white pt-3" style="border-radius: 1rem;">
+                        <div class="card-body p-5 text-center">
+
+                            <div class="mb-md-5 mt-md-4 pb-5">
+
+                                <h2 class="fw-bold mb-2 text-dark text-uppercase">Login</h2>
+                                {{#if loginErr}}
+                                <P class=" mb-1 text-danger">Enter valid details</p>
+                                {{/if}}
+                                <p class="text-dark">Please enter your login and password!</p>
+
+
+                                <form action="/login" method="post">
+                                    <div class="form-outline form-white mb-4">
+                                        <input type="email" id="typeEmailX" name="email" placeholder="Email"
+                                            class="form-control form-control-lg" />
+                                        <label class="form-label text-dark">Email</label>
+                                    </div>
+
+                                    <div class="form-outline form-white mb-4">
+                                        <input type="password" name="password" id="typePasswordX" placeholder="Password"
+                                            class="form-control form-control-lg" />
+                                        <label class="form-label text-dark">Password</label>
+                                    </div>
+
+                                    <button class="btn btn-outline-secondary btn-lg px-5 text-dark"
+                                        type="submit ">Login</button>
+
+                                    <br>
+
+                                    <a href="/signup" class="btn btn-outline-secondary px-5 text-dark mt-3">Create
+                                        Account</a>
+
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>

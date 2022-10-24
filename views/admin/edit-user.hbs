@@ -1,0 +1,25 @@
+<div class="container">
+  <div class="row">
+
+ 
+<h2  class="col-md-12 mx-auto" >Edit User</h2>
+
+    <div class="col-md-6 mx-auto">
+
+
+
+      <form action="/admin/edit-user/{{userId._id}}" method="POST" enctype="multipart/form-data">
+      <label for="Name">Name</label>
+      <input type="text" name="username" class="form-control" value="{{userId.username}}">
+
+      <label for="Category">Email</label>
+      <input type="text" name="email" class="form-control" value="{{userId.email}}">
+
+      <button type="submit" class="btn btn-primary mt-3" value="Upload">Edit</button>
+
+      </form>
+
+    </div>
+
+  </div>
+</div>

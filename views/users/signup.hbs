@@ -1,0 +1,157 @@
+<style>
+  .gradient-custom {
+    /* fallback for old browsers */
+    background: #4776E6;
+    /* fallback for old browsers */
+    background: -webkit-linear-gradient(to right, #79437a, #0038bb);
+    /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to right, #4840c4, #ff00ea);
+    /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
+
+
+  }
+</style>
+
+
+
+<body>
+  <section class="vh-100 gradient-custom">
+    <div class="container py-5 h-100">
+      <div class="row d-flex justify-content-center align-items-center h-100">
+        <div class="col-12 col-md-8 col-lg-6 col-xl-5">
+          <div class="card  text-white" style="border-radius: 1rem;">
+            <div class="card-body p-5 text-center">
+
+              <div class="mb-md-5 mt-md-4 pb-5">
+
+                <h2 class="fw-bold mb-2 text-dark text-uppercase">Signup</h2>
+
+                <div id="existError" class="text-danger"></div>
+
+                <form action="/signup" method="post">
+                  <div class="form-outline form-white mt-5">
+                    <p id="error1" class="text-danger"></p>
+                    <input type="text" name="username" placeholder="username" id='username'
+                      class="form-control form-control-lg">
+                    <label class="form-label text-dark">Username</label>
+                  </div>
+
+                  <div class="form-outline form-white">
+                    <p id="error2" class="text-danger"></p>
+                    <input type="email" name="email" placeholder="Email" id='email'
+                      class="form-control form-control-lg" />
+                    <label class="form-label text-dark">Email</label>
+                  </div>
+
+                  <div class="form-outline form-white mt-4">
+                    <p id="error3" class="text-danger"></p>
+                    <input type="password" name="password" placeholder="Password" id='password'
+                      class="form-control form-control-lg" />
+                    <label class="form-label text-dark">Password</label>
+                  </div>
+
+                  <button class="btn btn-outline-secondary btn-lg px-5 text-dark mt-4" onclick="validation()"
+                    type="button" id="submit">Create
+                    Account</button>
+                </form>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <script>
+
+    function validation() {
+
+      let username = document.getElementById('username')
+      let emailll = document.getElementById('email')
+      let passworddd = document.getElementById('password')
+
+      let user = username.value.trim()
+      let email = emailll.value.trim()
+      let password = passworddd.value.trim()
+
+      let flag = 1
+
+      var error1 = username.parentElement.querySelector('p')
+      var error2 = emailll.parentElement.querySelector('p')
+      var error3 = passworddd.parentElement.querySelector('p')
+
+      error1.innerText = ""
+      error2.innerText = ""
+      error3.innerText = ""
+
+
+      if (user == '') {
+        error1.innerText = "Enter valid username"
+        flag = 2
+      } else if (user <= 2) {
+        error1.innerText = "Enter more than 3 characters"
+        flag = 2
+      }
+
+
+      if (email == '') {
+        error2.innerText = "Enter valid email"
+        flag = 2
+      } else if (!email.match(/^[A-Za-z_]{3,}@[A-Za-z]{3,}[.]{1}[A-Za-z.]{2,6}$/)) {
+         error2.innerText = "Enter valid email"
+        flag = 2
+      }
+
+      if (password == '') {
+        error3.innerText = "Enter valid details"
+        flag = 2
+      } else if (password <= 4) {
+        error3.innerText = "Enter minimun 4 characters"
+        flag = 2
+      }
+    
+
+    if (flag == 1) {
+      submit(user, email, password)
+    }
+    }
+
+
+
+    function submit(user, email, password) {
+      fetch('/signup', {
+        method: "POST",
+
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body:JSON.stringify({
+          username: user,
+          email: email,
+          password: password
+        })
+
+      })
+
+        .then((res) => res.json())
+        .then((res => {
+
+          if (res.ll == "login successful") {
+            setTimeout(() => {
+              window.location.href = '/login'
+            },500)
+
+            var existError = document.getElementById('existError')
+            existError.innerText = res.ll
+
+          } else {
+            var existError = document.getElementById('existError')
+            existError.innerText = res.ll
+          }
+
+        }))
+    }
+
+
+  </script>

@@ -1,0 +1,98 @@
+{{!-- <section>
+  <div class="container">
+    <div class="row col-md-4">
+        <a href="/admin/add-users" class="btn btn-outline-primary w-25 btn-sm ">Add Users</a>
+    </div>
+
+     <form class="d-flex" role="search">
+        <input class="form-control me-2" type="text" id="myInput" placeholder="Search" aria-label="Search" onkeyup="myFunction()">
+        <button class="btn btn-outline-success" type="submit">Search</button>
+      </form>
+
+
+    <table class="table table-striped" id="myTable">
+      <thead>
+        <tr>
+          <th scope="col">No</th>
+          <th scope="col">Name</th>
+          <th scope="col">Email</th>
+          <th scope="col">Edit</th>
+         
+        </tr>
+      </thead>
+      <tbody>
+        {{#each users}}
+        <tr>
+          <th scope="row">{{inc @index}}</th>
+          <td>{{this.username}}</td>
+          <td>{{this.email}}</td>
+          <td>{{this.description}}</td></td>
+          <td><a href="/admin/edit-user/{{this._id}}" class="btn btn-outline-primary">Edit</a>
+          <a href="/admin/delete-user/{{this._id}}" onclick="return confirm('are you sure want to delete {{this.username}} ?')" class="btn btn-outline-danger">Delete</a></td>
+        </tr>
+        {{/each}}
+      </tbody>
+    </table>
+  </div>
+</section> --}}
+
+
+<section>
+  <div class="container">
+      <div class="col-md-4 mb-4">
+        <a href="/admin/add-users" class="btn btn-outline-primary w-25 btn-sm ">Add Users</a>
+    </div>
+  <input class="form-control mb-4" id="myInput" type="text"
+    placeholder="Type something to search list items" onkeyup="myFunction()">
+
+  <table class="table table-bordered table-striped">
+   <thead>
+        <tr>
+          <th scope="col">No</th>
+          <th scope="col">Name</th>
+          <th scope="col">Email</th>
+          <th scope="col">Edit</th>
+         
+        </tr>
+      </thead>
+    <tbody id="myTable">
+       {{#each users}}
+        <tr>
+          <td>{{inc @index}}</td>
+          <td>{{this.username}}</td>
+          <td>{{this.email}}</td>
+          <td><a href="/admin/edit-user/{{this._id}}" class="btn btn-outline-primary">Edit</a>
+          <a href="/admin/delete-user/{{this._id}}" onclick="return confirm('are you sure want to delete {{this.username}} ?')" class="btn btn-outline-danger">Delete</a></td>
+        </tr>
+        {{/each}}
+    </tbody>
+  </table>
+</div>
+</section>
+
+
+
+
+<script>
+function myFunction() {
+  // Declare variables
+  var input, filter, table, tr, td, i, txtValue;
+  input = document.getElementById("myInput");
+  filter = input.value.toUpperCase();
+  table = document.getElementById("myTable");
+  tr = table.getElementsByTagName("tr");
+
+  // Loop through all table rows, and hide those who don't match the search query
+  for (i = 0; i < tr.length; i++) {
+    td = tr[i].getElementsByTagName("td")[1];
+    if (td) {
+      txtValue = td.textContent || td.innerText;
+      if (txtValue.toUpperCase().indexOf(filter) > -1) {
+        tr[i].style.display = "";
+      } else {
+        tr[i].style.display = "none";
+      }
+    }
+  }
+}
+</script>

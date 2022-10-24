@@ -1,0 +1,58 @@
+<section>
+  <div class="container">
+    <div class="row">
+      <input class="form-control my-4" id="myInput" type="text"
+    placeholder="Type something to search list items" onkeyup="myFun()">
+        {{!-- <a href="/admin/add-products" class="btn btn-outline-primary">Add Products</a> --}}
+    </div>
+    <table class="table table-striped"  id="myTable">
+      <thead>
+        <tr>
+          <th scope="col">No</th>
+          <th scope="col">Title</th>
+          <th scope="col">Category</th>
+          <th scope="col">Description</th>
+          <th scope="col">Image</th>
+        </tr>
+      </thead>
+      <tbody>
+        {{#each products}}
+        {{!-- {{log this.imgName}} --}}
+        <tr>
+          <td scope="row">{{inc @index}}</td>
+          <td>{{this.name}}</td>
+          <td>{{this.category}}</td>
+          <td>{{this.description}}</td>
+          <td><img src="/product-images/{{this._id}}.jpg" style="height:3em; width:3em;" alt=""></td>
+        </tr>
+        {{/each}}
+      </tbody>
+    </table>
+  </div>
+</section>
+
+
+
+<script>
+function myFun() {
+  // Declare variables
+  var input, filter, table, tr, td, i, txtValue;
+  input = document.getElementById("myInput");
+  filter = input.value.toUpperCase();
+  table = document.getElementById("myTable");
+  tr = table.getElementsByTagName("tr");
+
+  // Loop through all table rows, and hide those who don't match the search query
+  for (i = 0; i < tr.length; i++) {
+    td = tr[i].getElementsByTagName("td")[1];
+    if (td) {
+      txtValue = td.textContent || td.innerText;
+      if (txtValue.toUpperCase().indexOf(filter) > -1) {
+        tr[i].style.display = "";
+      } else {
+        tr[i].style.display = "none";
+      }
+    }
+  }
+}
+</script>
